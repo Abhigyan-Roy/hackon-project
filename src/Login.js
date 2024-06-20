@@ -1,47 +1,28 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate, Link } from 'react-router-dom';
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+  const handleLogin = async () => {
     try {
-      await axios.post('http://localhost:5000/api/login', formData);
-      alert('User logged in successfully');
+      const response = await axios.post('http://localhost:5000/login', { email, password });
+      console.log(response.data.message); 
+      localStorage.setItem('token', response.data.token);
+      navigate('/dash');
     } catch (error) {
-      alert('Invalid credentials');
+      console.error(error.response.data.error);
     }
   };
 
   return (
-    <div>
+    <div id='container'>
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
+      <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+      <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+      <button onClick={handleLogin}>Login Here</button>
+      <p>Not having an account? <Link to="/">Create an account here</Link></p>
     </div>
   );
 };

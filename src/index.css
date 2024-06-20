@@ -5,9 +5,60 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+#container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 30vw;
+  padding: 20px;
+}
+#container input{
+  margin: 10px;
+  padding: 5px;
+}
+#container button{
+  padding: 5px;
+  background-color: rgb(10, 10, 54);
+  color: aliceblue;
+  cursor: pointer;
+}
+#products-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.product-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product-card{
+  border: 1px solid black;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px;
+  padding: 10px;
+}
+.header{
+  background-color: rgb(225, 225, 225);
+  width: 90vw;
+}
+.header h1{
+  color: black;
 }
